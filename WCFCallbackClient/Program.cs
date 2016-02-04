@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ServiceModel;
-using System.Threading;
 using WCFCallbackClient.WCFCallback;
 
 namespace WCFCallbackClient
@@ -9,27 +8,33 @@ namespace WCFCallbackClient
     {
         static void Main(string[] args)
         {
-            RetornoServico callback = new RetornoServico();
-            InstanceContext context = new InstanceContext(callback);
-            var client = new ServicoClient(context);
+            Console.WriteLine("Aperte Enter para iniciar o servico");
+            Console.ReadLine();
 
-            while (!Console.KeyAvailable)
-            {
-                try
-                {
-                    client.IniciaServico();
-                }
-                catch
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Error at service {0}", client.Endpoint.Address);
-                    Console.ResetColor();
-                    client.Abort();
-                    client = new ServicoClient(context);
-                }
-            }
+            IniciaServico();
 
+            Console.WriteLine("Aperte qualquer tecla para sair");
             Console.ReadKey();
+        }
+
+        private static void IniciaServico()
+        {
+            var callback = new RetornoServico();
+            var context = new InstanceContext(callback);
+            var client = new ServicoClient(context);
+           
+            try
+            {
+                client.IniciaServico();
+            }
+            catch (Exception ex)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(ex.Message);
+                Console.ResetColor();
+
+                IniciaServico();
+            }
         }
     }
 }

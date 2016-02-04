@@ -23,10 +23,7 @@ namespace WCFCallbackClient.WCFCallback {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string NomeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long NumeroField;
+        private string MensagemField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -39,27 +36,14 @@ namespace WCFCallbackClient.WCFCallback {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Nome {
+        public string Mensagem {
             get {
-                return this.NomeField;
+                return this.MensagemField;
             }
             set {
-                if ((object.ReferenceEquals(this.NomeField, value) != true)) {
-                    this.NomeField = value;
-                    this.RaisePropertyChanged("Nome");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Numero {
-            get {
-                return this.NumeroField;
-            }
-            set {
-                if ((this.NumeroField.Equals(value) != true)) {
-                    this.NumeroField = value;
-                    this.RaisePropertyChanged("Numero");
+                if ((object.ReferenceEquals(this.MensagemField, value) != true)) {
+                    this.MensagemField = value;
+                    this.RaisePropertyChanged("Mensagem");
                 }
             }
         }
@@ -127,5 +111,5 @@ namespace WCFCallbackClient.WCFCallback {
         public System.Threading.Tasks.Task IniciaServicoAsync() {
             return base.Channel.IniciaServicoAsync();
         }
-    }   
+    }
 }
